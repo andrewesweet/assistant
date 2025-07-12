@@ -1,0 +1,59 @@
+#!/bin/bash
+# Test wrapper for claude to verify model argument parsing
+
+set -euo pipefail
+
+# Track arguments for debugging
+echo "Claude wrapper called with arguments: $@" >&2
+
+# Default model
+model="sonnet-3-5"
+
+# Parse arguments to find model
+args=()
+skip_next=false
+for arg in "$@"; do
+    if [[ "$skip_next" == "true" ]]; then
+        skip_next=false
+        continue
+    fi
+    
+    if [[ "$arg" == "--model" ]] || [[ "$arg" == "-m" ]]; then
+        # Next argument is the model
+        skip_next=true
+        # Get the next argument as model
+        shift
+        if [[ $# -gt 0 ]]; then
+            case "$1" in
+                opus)
+                    model="claude-3-opus"
+                    ;;
+                sonnet)
+                    model="sonnet-3-5"
+                    ;;
+                *)
+                    model="$1"
+                    ;;
+            esac
+        fi
+        continue
+    fi
+    
+    args+=("$arg")
+done
+
+echo "Selected model: $model" >&2
+echo "Remaining args: ${args[@]}" >&2
+
+# For testing, just return a simple response based on the model
+if [[ "${args[@]}" =~ "2+2" ]]; then
+    echo "Using model $model: The answer is 4"
+elif [[ "${args[@]}" =~ "3+3" ]]; then
+    echo "Using model $model: The answer is 6"
+elif [[ "${args[@]}" =~ "4+4" ]]; then
+    echo "Using model $model: The answer is 8"
+elif [[ "${args[@]}" =~ "5+5" ]]; then
+    echo "Using model $model: The answer is 10"
+else
+    echo "Using model $model: I can help with that!"
+fi
