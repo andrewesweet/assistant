@@ -1,0 +1,22 @@
+# Session files
+.ai-session/
+*.lock
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# Log files
+*.log
+
+# macOS
+.DS_Store
+
+# Editor directories
+.vscode/
+.idea/
+
+# Test artifacts
+test-output/
+coverage/
