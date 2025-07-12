@@ -45,7 +45,11 @@ The AI Development Assistant enhances your development workflow by:
 - Bash 4.0+
 - Git
 
-### Quick Install
+### Installation Methods
+
+#### Method 1: Symlink Setup (Recommended)
+
+This method symlinks files from your git repository, making updates easier:
 
 1. Clone the repository:
 ```bash
@@ -53,9 +57,9 @@ git clone https://github.com/andrewesweet/assistant.git ~/assistant
 cd ~/assistant
 ```
 
-2. Run the installation script:
+2. Run the symlink setup:
 ```bash
-./install.sh
+./setup-symlinks.sh
 ```
 
 3. Reload your shell configuration:
@@ -66,6 +70,21 @@ source ~/.bashrc  # or ~/.zshrc
 4. Verify installation:
 ```bash
 status
+```
+
+**Benefits of symlinks:**
+- Easy updates with `git pull`
+- No file duplication
+- Changes immediately reflected
+- Simple uninstall (just remove symlinks)
+
+#### Method 2: Copy Installation
+
+If you prefer copying files instead of symlinks:
+
+```bash
+cd ~/assistant
+./install.sh
 ```
 
 ## Usage
