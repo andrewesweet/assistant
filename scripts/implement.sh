@@ -4,9 +4,12 @@
 set -euo pipefail
 
 # Configuration
-SESSION_ROOT="${SESSION_ROOT:-.ai-session}"
 DATE_FORMAT="+%Y-%m-%dT%H:%M:%SZ"
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
+# Source AI assistant configuration
+source "$SCRIPT_DIR/ai-config.sh"
+
 USE_SESSIONS="${USE_SESSIONS:-true}"
 
 # Get feature ID

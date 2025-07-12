@@ -8,7 +8,10 @@ set -euo pipefail
 DEFAULT_TIMEOUT=180  # 3 minutes default
 DEBUG=${DEBUG:-false}
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-SESSION_DIR="${SESSION_DIR:-$HOME/.ai-sessions}"
+
+# Source AI assistant configuration
+source "$SCRIPT_DIR/ai-config.sh"
+
 MAX_SESSION_NAME_LENGTH=100
 
 # Colors for output

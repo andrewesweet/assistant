@@ -7,7 +7,11 @@ set -euo pipefail
 
 # Get the directory of this script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Source AI assistant configuration
+source "$SCRIPT_DIR/ai-config.sh"
+
+PROJECT_ROOT="$(get_project_root)"
 
 # Common utilities will be sourced as needed
 
@@ -456,12 +460,12 @@ display_all_sessions() {
                 else
                     echo -e "  Status: ${YELLOW}$status${NC}"
                 fi
-                echo "  Run: ./scripts/status.sh $feature"
+                echo "  Run: status $feature"
             fi
         done
         
         echo -e "\n${BLUE}═══════════════════════════════════════════════════════${NC}"
-        echo -e "\nFor detailed status, run: ${CYAN}./scripts/status.sh <feature-id>${NC}\n"
+        echo -e "\nFor detailed status, run: ${CYAN}status <feature-id>${NC}\n"
     fi
 }
 
